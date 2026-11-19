@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3e8">
+  <meta name="description" content="Plant a field, raise a cottage, and help a little village grow in a sunlit valley.">
+  <title>Little Harvest</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="sprout" viewBox="0 0 24 24"><path d="M12 21v-9m0 2C6 14 3 10 3 5c5 0 9 3 9 9Zm0-2c0-5 4-8 9-8 0 5-3 8-9 8ZM8 21h8"/></symbol>
+    <symbol id="people" viewBox="0 0 24 24"><circle cx="10" cy="7" r="3"/><path d="M3.5 20v-2a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v2m1-16a3.1 3.1 0 0 1 0 6m1.7 4a4 4 0 0 1 2.3 3.6V20"/></symbol>
+    <symbol id="wheat" viewBox="0 0 24 24"><path d="m3 21 16-16M8 16C3 16 3 11 4 8c4 1 6 3 4 8Zm0 0c2 3 6 4 9 0-2-3-5-3-9 0Zm5-5C8 10 8 5 10 3c4 2 4 5 3 8Zm0 0c3 2 7 2 9-2-3-2-6-1-9 2ZM17 7c-1-4 1-6 5-6 0 4-2 6-5 6Z"/></symbol>
+    <symbol id="home" viewBox="0 0 24 24"><path d="m2 11 10-8 10 8m-3-2v12h-5v-6h-4v6H5V9m12-3V3h3v6"/></symbol>
+    <symbol id="field" viewBox="0 0 24 24"><path d="M3 12h18M3 16h18m-18 4h18M12 12V7m0 1C7 8 6 5 6 3c4 0 6 2 6 5Zm0 0c0-3 2-5 6-5 0 2-1 5-6 5ZM7 12l-3 8m8-8v8m5-8 3 8"/></symbol>
+    <symbol id="path" viewBox="0 0 24 24"><path d="M5 22c0-8 12-7 12-12 0-3-4-4-4-8m-2 20c0-5 11-6 11-12 0-4-4-6-4-8M18 13l.7 1.2M16 5l.6 1"/></symbol>
+    <symbol id="rain" viewBox="0 0 24 24"><path d="M5.5 13.5h12a3.5 3.5 0 0 0 .3-7 5.2 5.2 0 0 0-9.8.8 3.25 3.25 0 1 0-2.5 6.2ZM8 17l-1.5 3m6-3-1.5 3m6-3-1.5 3"/></symbol>
+    <symbol id="hand" viewBox="0 0 24 24"><path d="M8 13V5a1.4 1.4 0 0 1 2.8 0v5-7a1.4 1.4 0 0 1 2.8 0v7-6a1.4 1.4 0 0 1 2.8 0v7-4a1.4 1.4 0 0 1 2.8 0v7c0 4.5-2.3 7-6 7h-2c-2 0-3.5-1-4.6-2.5l-3.1-5a1.6 1.6 0 0 1 2.6-1.8L8 14"/></symbol>
+    <symbol id="book" viewBox="0 0 24 24"><path d="M12 6c-2.5-2.5-6-3-9-2v14c3-1 6.5-.5 9 2 2.5-2.5 6-3 9-2V4c-3-1-6.5-.5-9 2Zm0 0v14M6 8l3 .5M6 12l3 .5m6-4 3-.5m-3 4.5 3-.5"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+    <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
+    <symbol id="plus" viewBox="0 0 24 24"><path d="M5 12h14m-7-7v14"/></symbol>
+    <symbol id="minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="reset" viewBox="0 0 24 24"><path d="M4 11a8 8 0 1 1 2 6m-2-6V5m0 6h6"/></symbol>
+    <symbol id="volume" viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9H3Zm13-1a6 6 0 0 1 0 8m2.8-10a9 9 0 0 1 0 12"/></symbol>
+    <symbol id="mute" viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9H3Zm13 1 5 5m0-5-5 5"/></symbol>
+    <symbol id="center" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></symbol>
+  </svg>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Little Harvest home"><span class="brand-mark"><svg><use href="#sprout"/></svg></span><span>Little Harvest</span></a>
+    <div class="inventory" aria-label="Village resources">
+      <span class="resource" title="Settlers"><svg><use href="#people"/></svg><b id="settler-count">3</b><span>Settlers</span></span>
+      <span class="resource" title="Grain"><svg class="gold"><use href="#wheat"/></svg><b id="grain-count">0</b><span>Grain</span></span>
+      <span class="resource" title="Cottages"><svg class="clay"><use href="#home"/></svg><b id="cottage-count">1</b><span>Cottages</span></span>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="sound" aria-label="Turn on sound" aria-pressed="false" title="Turn on sound"><svg><use href="#mute"/></svg></button>
+      <button class="icon-btn" id="new-game" aria-label="Start a new village" title="Start a new village"><svg><use href="#reset"/></svg></button>
+    </div>
+  </header>
+  <main class="game">
+    <section id="stage" class="stage" aria-label="Willowbrook building area">
+      <canvas id="canvas" aria-label="3D village. Click on the ground to use the selected tool."></canvas>
+      <div class="place-name">
+        <span><svg><use href="#sun"/></svg> THE WILLOW VALLEY</span>
+        <h1>Willowbrook</h1>
+      </div>
+      <aside class="journal" aria-label="Village journal">
+        <div class="journal-heading"><svg><use href="#book"/></svg><h2>Village journal</h2></div>
+        <p id="chapter">The first harvest</p>
+        <ol id="objectives">
+          <li><span></span>Plant a wheat field</li>
+          <li><span></span>Bring home the first harvest</li>
+          <li><span></span>Welcome a new family</li>
+        </ol>
+      </aside>
+      <div id="toast" class="toast" role="status" hidden></div>
+      <button id="cloud" class="cloud-pin" aria-label="Drag the cloud onto a wheat field to water it" title="Drag over a field to make it rain"><svg><use href="#rain"/></svg><span>Rain cloud</span></button>
+      <div id="plot-hint" class="plot-hint" aria-hidden="true"><span>Good soil</span><i></i></div>
+      <div class="camera-controls" aria-label="Camera controls">
+        <button id="zoom-in" aria-label="Zoom in" title="Zoom in"><svg><use href="#plus"/></svg></button>
+        <button id="zoom-out" aria-label="Zoom out" title="Zoom out"><svg><use href="#minus"/></svg></button>
+        <button id="recenter" aria-label="Reset camera" title="Reset camera"><svg><use href="#center"/></svg></button>
+      </div>
+      <div id="fallback" class="fallback" hidden>The village needs a browser with WebGL 2 to display its 3D world.</div>
+    </section>
+    <section class="tool-area" aria-label="Building tools">
+      <div class="tool-hint"><span id="tool-name">Wheat field</span><p id="tool-tip">Plant a field in the meadow. Your settlers will tend it.</p></div>
+      <nav class="tools" aria-label="Select a tool">
+        <button class="tool" data-tool="field" aria-pressed="true" title="Wheat field (1)"><span class="stamp field"><svg><use href="#field"/></svg></span><span>Field</span><kbd>1</kbd></button>
+        <button class="tool" data-tool="cottage" aria-pressed="false" title="Cottage (2)"><span class="stamp cottage"><svg><use href="#home"/></svg></span><span>Cottage</span><kbd>2</kbd></button>
+        <button class="tool" data-tool="path" aria-pressed="false" title="Footpath (3)"><span class="stamp path"><svg><use href="#path"/></svg></span><span>Path</span><kbd>3</kbd></button>
+        <button class="tool" data-tool="rain" aria-pressed="false" title="Rain (4)"><span class="stamp rain"><svg><use href="#rain"/></svg></span><span>Rain</span><kbd>4</kbd></button>
+        <button class="tool" data-tool="hand" aria-pressed="false" title="Move camera (5)"><span class="stamp hand"><svg><use href="#hand"/></svg></span><span>Look</span><kbd>5</kbd></button>
+      </nav>
+      <div class="season"><svg><use href="#sun"/></svg><span>Spring in Willowbrook</span></div>
+    </section>
+  </main>
+  <dialog id="reset-dialog">
+    <form method="dialog">
+      <h2>Start a new village?</h2>
+      <p>Your fields, cottages, and harvest will be cleared.</p>
+      <div><button value="cancel">Keep playing</button><button value="reset" class="primary">Start over</button></div>
+    </form>
+  </dialog>
+  <script type="module">
+    import('./game.mjs').catch((error) => {
+      document.getElementById('fallback').hidden = false;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
